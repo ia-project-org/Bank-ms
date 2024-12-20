@@ -8,6 +8,6 @@ spring:
     active: default
   cloud:
     config:
-      uri: http://localhost:8888
+      uri: "${CONFIG_SERVER_URI:http://localhost:8888}"  # Using environment variable or default value
       fail-fast: true
-      label: feat/ai-10-set-up-the-server-config
+#      label: feat/ai-10-set-up-the-server-config
