@@ -15,6 +15,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableConfigurationProperties
 @EnableJpaAuditing
 public class BankMsApplication {
+
+
 	public static void main(String[] args) {
 		SpringApplication.run(BankMsApplication.class, args);
 	}
