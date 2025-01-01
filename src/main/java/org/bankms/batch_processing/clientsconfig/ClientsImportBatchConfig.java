@@ -1,6 +1,7 @@
 package org.bankms.batch_processing.clientsconfig;
 
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.bankms.clientsms.dto.ClientCsvRecord;
 import org.bankms.clientsms.model.Client;
@@ -16,6 +17,7 @@ import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -35,7 +37,8 @@ public class ClientsImportBatchConfig {
 
     private final JobRepository jobRepository;
 
-    public final static String file_path = "C:/Users/HP/backup/IaProject/Bank-ms/src/main/resources/static/clientsDetails.csv";
+    @Value("${app.file.path}")
+    public static String file_path;
 
     @Bean
     public FlatFileItemReader<ClientCsvRecord> ClientItemReader() {
