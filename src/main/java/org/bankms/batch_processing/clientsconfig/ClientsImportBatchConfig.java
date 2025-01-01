@@ -40,6 +40,7 @@ public class ClientsImportBatchConfig {
     @Value("${app.file.path}")
     public static String file_path;
 
+
     @Bean
     public FlatFileItemReader<ClientCsvRecord> ClientItemReader() {
         FlatFileItemReader<ClientCsvRecord> itemReader = createItemReader(file_path,"ClientItemReader");
