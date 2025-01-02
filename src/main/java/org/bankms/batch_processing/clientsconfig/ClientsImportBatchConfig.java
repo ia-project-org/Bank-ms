@@ -43,11 +43,17 @@ public class ClientsImportBatchConfig {
     @Autowired
     private ResourceLoader resourceLoader;
 
-//    @Value("classpath:static/clientsDetails.csv")
     public static String file_path;
 
-    @Value("classpath:static/clientsDetails.csv")
-    private String filePathValue;
+////    @Value("classpath:static/clientsDetails.csv")
+//    private final String filePathValue = "static/clientsDetails.csv";
+//
+//    @PostConstruct
+//    private void initStaticFilePath() {
+//        file_path = filePathValue;
+//    }
+
+    private final String filePathValue = "classpath:static/clientsDetails.csv";
 
     @PostConstruct
     private void initStaticFilePath() {
@@ -57,9 +63,10 @@ public class ClientsImportBatchConfig {
     @Bean
     public FlatFileItemReader<ClientCsvRecord> ClientItemReader() {
         FlatFileItemReader<ClientCsvRecord> itemReader = new FlatFileItemReader<>();
-        System.out.println("+++++++++++++++++++++++++++++This is the file path: ++++++++++++++++++++++++++++++" + file_path);
-        System.out.println("+++++++++++++++++++++++++++++This is the file path value: ++++++++++++++++++++++++++++++" + file_path);
-        itemReader.setResource(resourceLoader.getResource(file_path));
+
+        // You can directly use resourceLoader.getResource() with the path
+        itemReader.setResource(resourceLoader.getResource(filePathValue));
+
         itemReader.setName("ClientItemReader");
         itemReader.setLinesToSkip(1);
         itemReader.setLineMapper(lineMapper());
