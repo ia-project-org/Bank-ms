@@ -17,7 +17,7 @@ EXPOSE 9001
 COPY --from=builder /app/target/*.jar app.jar
 
 # Copy the resources/static folder from the builder stage
-COPY --from=builder /app/src/main/resources/static /app/resources/static
+COPY --from=builder /app/target/classes/static /app/resources/static
 
 # Run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
