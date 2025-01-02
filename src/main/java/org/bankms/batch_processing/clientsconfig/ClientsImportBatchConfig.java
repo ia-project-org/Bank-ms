@@ -55,6 +55,7 @@ public class ClientsImportBatchConfig {
 //        itemReader.setLineMapper(lineMapper());
 //        return itemReader;
         FlatFileItemReader<ClientCsvRecord> itemReader = new FlatFileItemReader<>();
+        System.out.println("+++++++++++++++++++++++++++++This is the file path: ++++++++++++++++++++++++++++++" + file_path);
         itemReader.setResource(resourceLoader.getResource(file_path));
         itemReader.setName("ClientItemReader");
         itemReader.setLinesToSkip(1);
