@@ -17,9 +17,11 @@ import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import static org.bankms.batch_processing.utlis.Utils.createItemReader;
@@ -37,13 +39,24 @@ public class ClientsImportBatchConfig {
 
     private final JobRepository jobRepository;
 
+    @Autowired
+    private ResourceLoader resourceLoader;
+
 //    @Value("${app.file.path}")
-    public static String file_path = "src/main/resources/static/clientsDetails.csv";
+//    public static String file_path = "src/main/resources/static/clientsDetails.csv";
+    @Value("classpath:static/clientsDetails.csv")
+    public static String file_path;
 
 
     @Bean
     public FlatFileItemReader<ClientCsvRecord> ClientItemReader() {
-        FlatFileItemReader<ClientCsvRecord> itemReader = createItemReader(file_path,"ClientItemReader");
+//        FlatFileItemReader<ClientCsvRecord> itemReader = createItemReader(file_path,"ClientItemReader");
+//        itemReader.setLinesToSkip(1);
+//        itemReader.setLineMapper(lineMapper());
+//        return itemReader;
+        FlatFileItemReader<ClientCsvRecord> itemReader = new FlatFileItemReader<>();
+        itemReader.setResource(resourceLoader.getResource(file_path));
+        itemReader.setName("ClientItemReader");
         itemReader.setLinesToSkip(1);
         itemReader.setLineMapper(lineMapper());
         return itemReader;
