@@ -37,8 +37,8 @@ public class ClientsImportBatchConfig {
 
     private final JobRepository jobRepository;
 
-    @Value("${app.file.path}")
-    public static String file_path;
+//    @Value("${app.file.path}")
+    public static String file_path = "src/main/resources/static/clientsDetails.csv";
 
 
     @Bean
