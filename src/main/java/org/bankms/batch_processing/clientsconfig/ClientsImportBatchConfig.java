@@ -43,7 +43,7 @@ public class ClientsImportBatchConfig {
     @Autowired
     private ResourceLoader resourceLoader;
 
-    public static String file_path = "classpath:static/clientsDetails.csv";
+    public static String file_path = "/app/resources/static/clientsDetails.csv";
 
 ////    @Value("classpath:static/clientsDetails.csv")
 //    private final String filePathValue = "static/clientsDetails.csv";
