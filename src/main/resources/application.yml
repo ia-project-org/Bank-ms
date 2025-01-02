@@ -2,6 +2,23 @@ spring:
   batch:
     job:
       enabled: true
+    jdbc:
+      initialize-schema: always
+      schema: classpath:org/springframework/batch/core/schema-postgresql.sql
+
+#  datasource:
+#    driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME:org.postgresql.Driver}
+#    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://postgres-client-service:5432/clientside}
+#    username: ${SPRING_DATASOURCE_USERNAME:myuser}
+#    password: ${SPRING_DATASOURCE_PASSWORD:mypassword}
+#  jpa:
+#    database-platform: ${SPRING_JPA_DATABASE_PLATFORM:org.hibernate.dialect.PostgreSQLDialect}
+#    hibernate:
+#      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:create}
+#  servlet:
+#    multipart:
+#      max-file-size: 50MB
+#      max-request-size: 50MB
 
 #spring:
 #  batch:
