@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.transaction.PlatformTransactionManager;
 
@@ -42,8 +43,8 @@ public class ClientsImportBatchConfig {
 
     private final JobRepository jobRepository;
 
-    @Autowired
-    private ResourceLoader resourceLoader;
+//    @Autowired
+//    private ResourceLoader resourceLoader;
 
     public static String file_path = "/app/resources/static/clientsDetails.csv";
 
@@ -69,7 +70,7 @@ public class ClientsImportBatchConfig {
         FlatFileItemReader<ClientCsvRecord> itemReader = new FlatFileItemReader<>();
 
         // You can directly use resourceLoader.getResource() with the path
-        itemReader.setResource(resourceLoader.getResource(file_path));
+        itemReader.setResource(new FileSystemResource("/app/resources/static/clientsDetails.csv"));
 
         itemReader.setName("ClientItemReader");
         itemReader.setLinesToSkip(1);
