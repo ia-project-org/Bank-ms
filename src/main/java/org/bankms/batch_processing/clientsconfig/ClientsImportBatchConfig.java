@@ -1,6 +1,7 @@
 package org.bankms.batch_processing.clientsconfig;
 
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.bankms.clientsms.dto.ClientCsvRecord;
 import org.bankms.clientsms.model.Client;
@@ -42,20 +43,22 @@ public class ClientsImportBatchConfig {
     @Autowired
     private ResourceLoader resourceLoader;
 
-//    @Value("${app.file.path}")
-//    public static String file_path = "src/main/resources/static/clientsDetails.csv";
-    @Value("classpath:static/clientsDetails.csv")
+//    @Value("classpath:static/clientsDetails.csv")
     public static String file_path;
 
+    @Value("classpath:static/clientsDetails.csv")
+    private String filePathValue;
+
+    @PostConstruct
+    private void initStaticFilePath() {
+        file_path = filePathValue;
+    }
 
     @Bean
     public FlatFileItemReader<ClientCsvRecord> ClientItemReader() {
-//        FlatFileItemReader<ClientCsvRecord> itemReader = createItemReader(file_path,"ClientItemReader");
-//        itemReader.setLinesToSkip(1);
-//        itemReader.setLineMapper(lineMapper());
-//        return itemReader;
         FlatFileItemReader<ClientCsvRecord> itemReader = new FlatFileItemReader<>();
         System.out.println("+++++++++++++++++++++++++++++This is the file path: ++++++++++++++++++++++++++++++" + file_path);
+        System.out.println("+++++++++++++++++++++++++++++This is the file path value: ++++++++++++++++++++++++++++++" + file_path);
         itemReader.setResource(resourceLoader.getResource(file_path));
         itemReader.setName("ClientItemReader");
         itemReader.setLinesToSkip(1);
