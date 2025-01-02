@@ -2,6 +2,7 @@ package org.bankms.batch_processing.clientsconfig;
 
 
 import jakarta.annotation.PostConstruct;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.bankms.clientsms.dto.ClientCsvRecord;
 import org.bankms.clientsms.model.Client;
@@ -29,6 +30,7 @@ import static org.bankms.batch_processing.utlis.Utils.createItemReader;
 
 @Configuration
 @RequiredArgsConstructor
+//@AllArgsConstructor
 @EnableBatchProcessing
 public class ClientsImportBatchConfig {
 

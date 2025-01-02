@@ -17,7 +17,7 @@ spring:
 #      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:create}
 #  servlet:
 #    multipart:
-#      max-file-size: 50MB
+#      max-file-size: 50MB/
 #      max-request-size: 50MB
 
 #spring:
