@@ -49,7 +49,7 @@ public class ClientController {
 
     @PostMapping("/import-csv")
     public ResponseEntity<String> importCsv(@RequestParam("file") MultipartFile file) throws Exception {
-        file.transferTo(new File("C:/Users/HP/backup/Bank-ms/src/main/resources/static/clientsDetails.csv"));
+        file.transferTo(new File("/app/resources/static/clientsDetails.csv"));
         JobExecution jobExecution = jobLauncher.run(importClientJob, new JobParametersBuilder()
                 .addString("fileName", file.getOriginalFilename())
                 .addString("timsmap", String.valueOf(System.currentTimeMillis()))
