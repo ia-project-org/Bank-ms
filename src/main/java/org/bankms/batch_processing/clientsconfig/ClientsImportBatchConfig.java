@@ -38,26 +38,7 @@ public class ClientsImportBatchConfig {
 
     private final JobRepository jobRepository;
 
-//    @Autowired
-//    private ResourceLoader resourceLoader;
-
-    public static String file_path = "C:/Users/HP/backup/Bank-ms/src/main/resources/static/clientsDetails.csv";
-
-////    @Value("classpath:static/clientsDetails.csv")
-//    private final String filePathValue = "static/clientsDetails.csv";
-//
-//    @PostConstruct
-//    private void initStaticFilePath() {
-//        file_path = filePathValue;
-//    }
-
-//    private final String filePathValue = "classpath:static/clientsDetails.csv";
-
-//    @PostConstruct
-//    private void initStaticFilePath() {
-//        file_path = filePathValue;
-//    }
-
+    public static String file_path = "/app/resources/static/clientsDetails.csv";
 
 
     @Bean
