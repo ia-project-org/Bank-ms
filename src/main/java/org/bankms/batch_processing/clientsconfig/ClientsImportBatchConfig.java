@@ -38,8 +38,8 @@ public class ClientsImportBatchConfig {
 
     private final JobRepository jobRepository;
 
-    @Autowired
-    private ResourceLoader resourceLoader;
+//    @Autowired
+//    private ResourceLoader resourceLoader;
 
     public static String file_path = "C:/Users/HP/backup/Bank-ms/src/main/resources/static/clientsDetails.csv";
 
@@ -64,7 +64,9 @@ public class ClientsImportBatchConfig {
     public FlatFileItemReader<ClientCsvRecord> ClientItemReader() {
         FlatFileItemReader<ClientCsvRecord> itemReader = new FlatFileItemReader<>();
         // You can directly use resourceLoader.getResource() with the path
-        itemReader.setResource(new FileSystemResource("C:/Users/HP/backup/Bank-ms/src/main/resources/static/clientsDetails.csv"));
+
+        itemReader.setResource(new FileSystemResource("/app/resources/static/clientsDetails.csv"));
+      
         itemReader.setName("ClientItemReader");
         itemReader.setLinesToSkip(1);
         itemReader.setLineMapper(lineMapper());
