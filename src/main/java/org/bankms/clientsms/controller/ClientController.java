@@ -1,10 +1,7 @@
 package org.bankms.clientsms.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.bankms.clientsms.config.ApplicationPropertiesConfiguration;
-import org.bankms.clientsms.dto.ClientDto;
 import org.bankms.clientsms.model.Client;
-import org.bankms.clientsms.model.ClientDetails;
 import org.bankms.clientsms.service.ClientService;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
@@ -14,7 +11,7 @@ import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRestartException;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
-import java.util.ArrayList;
 
-import static org.bankms.batch_processing.clientsconfig.ClientsImportBatchConfig.file_path;
 
 @RestController
 @RequestMapping("/clients")
@@ -37,6 +32,9 @@ public class ClientController {
     private final Job importClientJob;
 
     private final ClientService clientService;
+
+    @Value("classpath:static/clientsDetails.csv")
+    public String file_path;
 
     @GetMapping
     public ResponseEntity<Page<Client>> getPaginatedClients(

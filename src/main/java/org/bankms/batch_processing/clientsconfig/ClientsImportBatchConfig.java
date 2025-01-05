@@ -1,8 +1,6 @@
 package org.bankms.batch_processing.clientsconfig;
 
 
-import jakarta.annotation.PostConstruct;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.bankms.clientsms.dto.ClientCsvRecord;
 import org.bankms.clientsms.model.Client;
@@ -20,13 +18,11 @@ import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.transaction.PlatformTransactionManager;
-
-import static org.bankms.batch_processing.utlis.Utils.createItemReader;
 
 @Configuration
 @RequiredArgsConstructor
@@ -69,7 +65,7 @@ public class ClientsImportBatchConfig {
         FlatFileItemReader<ClientCsvRecord> itemReader = new FlatFileItemReader<>();
 
         // You can directly use resourceLoader.getResource() with the path
-        itemReader.setResource(resourceLoader.getResource(file_path));
+        itemReader.setResource(new FileSystemResource("/app/resources/static/clientsDetails.csv"));
 
         itemReader.setName("ClientItemReader");
         itemReader.setLinesToSkip(1);
@@ -90,7 +86,7 @@ public class ClientsImportBatchConfig {
     @Bean
     public Step ClientimportStep() {
         return new StepBuilder("importClientsStep", jobRepository)
-                .<ClientCsvRecord, Client>chunk(50, platformTransactionManager)
+                .<ClientCsvRecord, Client>chunk(20, platformTransactionManager)
                 .reader(ClientItemReader())
                 .processor(Clientprocessor())
                 .writer(Clientwriter())
@@ -123,7 +119,7 @@ public class ClientsImportBatchConfig {
                 "occupation_Doctor", "occupation_Engineer", "occupation_Entrepreneur",
                 "occupation_Journalist", "occupation_Lawyer", "occupation_Manager",
                 "occupation_Mechanic", "occupation_Media_Manager", "occupation_Musician",
-                "occupation_Scientist", "occupation_Teacher", "occupation_Writer","credit_score"
+                "occupation_Scientist", "occupation_Teacher", "occupation_Writer"
         );
 
         lineTokenizer.setStrict(false);

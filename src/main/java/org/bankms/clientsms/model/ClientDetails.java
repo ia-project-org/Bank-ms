@@ -194,11 +194,6 @@ public class ClientDetails {
     @JsonProperty("occupation_Writer")
     private Integer occupationWriter; // Updated to bool
 
-    @JsonProperty("credit_score")
-    @Column(nullable = false)
-    private String creditScore; // Updated to int64
-
-
     public ClientDetails(){
 
     }
