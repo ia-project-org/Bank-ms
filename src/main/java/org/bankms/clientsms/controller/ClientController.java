@@ -11,7 +11,6 @@ import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRestartException;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
-
 
 @RestController
 @RequestMapping("/clients")
@@ -32,9 +30,6 @@ public class ClientController {
     private final Job importClientJob;
 
     private final ClientService clientService;
-
-    @Value("classpath:static/clientsDetails.csv")
-    public String file_path;
 
     @GetMapping
     public ResponseEntity<Page<Client>> getPaginatedClients(
@@ -54,11 +49,11 @@ public class ClientController {
 
     @PostMapping("/import-csv")
     public ResponseEntity<String> importCsv(@RequestParam("file") MultipartFile file) throws Exception {
-        file.transferTo(new File(file_path));
+        file.transferTo(new File("C:/Users/HP/backup/Bank-ms/src/main/resources/static/clientsDetails.csv"));
         JobExecution jobExecution = jobLauncher.run(importClientJob, new JobParametersBuilder()
-                        .addString("fileName", file.getOriginalFilename())
-                        .addString("timsmap", String.valueOf(System.currentTimeMillis()))
-                        .toJobParameters());
+                .addString("fileName", file.getOriginalFilename())
+                .addString("timsmap", String.valueOf(System.currentTimeMillis()))
+                .toJobParameters());
         String msg = jobExecution.getStatus().isUnsuccessful()?"Job echoue !!!":"CSV imported successfully.";
         return ResponseEntity.ok(msg);
     }
