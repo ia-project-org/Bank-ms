@@ -5,7 +5,9 @@ spring:
     jdbc:
       initialize-schema: always
       schema: classpath:org/springframework/batch/core/schema-postgresql.sql
-
+app:
+  file:
+    input-path: classpath:static/clientsDetails.csv
 #  datasource:
 #    driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME:org.postgresql.Driver}
 #    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://postgres-client-service:5432/clientside}

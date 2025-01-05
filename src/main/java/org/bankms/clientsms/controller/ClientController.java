@@ -1,10 +1,7 @@
 package org.bankms.clientsms.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.bankms.clientsms.config.ApplicationPropertiesConfiguration;
-import org.bankms.clientsms.dto.ClientDto;
 import org.bankms.clientsms.model.Client;
-import org.bankms.clientsms.model.ClientDetails;
 import org.bankms.clientsms.service.ClientService;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
@@ -14,7 +11,6 @@ import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRestartException;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
-import java.util.ArrayList;
-
-import static org.bankms.batch_processing.clientsconfig.ClientsImportBatchConfig.file_path;
 
 @RestController
 @RequestMapping("/clients")
@@ -56,11 +49,11 @@ public class ClientController {
 
     @PostMapping("/import-csv")
     public ResponseEntity<String> importCsv(@RequestParam("file") MultipartFile file) throws Exception {
-        file.transferTo(new File(file_path));
+        file.transferTo(new File("C:/Users/HP/backup/Bank-ms/src/main/resources/static/clientsDetails.csv"));
         JobExecution jobExecution = jobLauncher.run(importClientJob, new JobParametersBuilder()
-                        .addString("fileName", file.getOriginalFilename())
-                        .addString("timsmap", String.valueOf(System.currentTimeMillis()))
-                        .toJobParameters());
+                .addString("fileName", file.getOriginalFilename())
+                .addString("timsmap", String.valueOf(System.currentTimeMillis()))
+                .toJobParameters());
         String msg = jobExecution.getStatus().isUnsuccessful()?"Job echoue !!!":"CSV imported successfully.";
         return ResponseEntity.ok(msg);
     }

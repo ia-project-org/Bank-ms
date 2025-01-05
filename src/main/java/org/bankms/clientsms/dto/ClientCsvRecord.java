@@ -76,7 +76,7 @@ public class ClientCsvRecord {
 
     @JsonProperty("credit_mix")
     
-    private Long creditMix; // Updated to int64
+    private String creditMix; // Updated to int64
 
     @JsonProperty("outstanding_debt")
     
@@ -92,7 +92,7 @@ public class ClientCsvRecord {
 
     @JsonProperty("payment_of_min_amount")
     
-    private Long paymentOfMinAmount; // Updated to int64
+    private String paymentOfMinAmount; // Updated to int64
 
     @JsonProperty("amount_invested_monthly")
     
@@ -180,10 +180,5 @@ public class ClientCsvRecord {
 
     @JsonProperty("occupation_Writer")
     private Integer occupationWriter; // Updated to bool
-
-    @JsonProperty("credit_score")
-    
-    private String creditScore; // Updated to int64
-
 
 }

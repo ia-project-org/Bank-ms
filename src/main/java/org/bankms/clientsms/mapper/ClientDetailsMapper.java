@@ -57,7 +57,6 @@ public class ClientDetailsMapper {
                 .occupationScientist(record.getOccupationScientist())
                 .occupationTeacher(record.getOccupationTeacher())
                 .occupationWriter(record.getOccupationWriter())
-                .creditScore(record.getCreditScore())
                 .build();
     }
 }
