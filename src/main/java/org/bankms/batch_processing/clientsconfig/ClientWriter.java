@@ -1,6 +1,6 @@
 package org.bankms.batch_processing.clientsconfig;
 
-import org.bankms.clientsms.model.Client;
+import org.bankms.clientsms.model.Client1;
 import org.bankms.clientsms.model.ClientDetails;
 import org.bankms.clientsms.repository.ClientDetailsRepository;
 import org.bankms.clientsms.repository.ClientRepository;
@@ -10,7 +10,7 @@ import org.springframework.batch.item.ItemWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClientWriter implements ItemWriter<Client> {
+public class ClientWriter implements ItemWriter<Client1> {
     private final ClientRepository clientRepository;
     private final ClientDetailsRepository clientDetailsRepository;
 
@@ -22,12 +22,12 @@ public class ClientWriter implements ItemWriter<Client> {
 
 
     @Override
-    public void write(Chunk<? extends Client> clients) throws Exception {
-        // Extracting the ClientDetails from the Client entities
+    public void write(Chunk<? extends Client1> clients) throws Exception {
+        // Extracting the ClientDetails from the Client1 entities
         List<ClientDetails> clientDetailsList = new ArrayList<>();
-        List<Client> cliensList = new ArrayList<>();
+        List<Client1> cliensList = new ArrayList<>();
 
-        for (Client client : clients) {
+        for (Client1 client : clients) {
             ClientDetails clientDetails = client.getDetails();
             if(!clientRepository.existsByCin(client.getCin())
                     && !clientRepository.existsByEmail(client.getEmail())
@@ -39,7 +39,7 @@ public class ClientWriter implements ItemWriter<Client> {
         }
         // Save ClientDetails first
         clientDetailsRepository.saveAll(clientDetailsList);
-        // Save the Client entities
+        // Save the Client1 entities
         clientRepository.saveAll(cliensList);
     }
 

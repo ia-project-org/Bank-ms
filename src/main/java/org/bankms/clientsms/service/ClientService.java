@@ -1,7 +1,7 @@
 package org.bankms.clientsms.service;
 
 import org.bankms.clientsms.dto.ClientDto;
-import org.bankms.clientsms.model.Client;
+import org.bankms.clientsms.model.Client1;
 import org.bankms.clientsms.model.ClientDetails;
 import org.springframework.data.domain.Page;
 
@@ -11,15 +11,15 @@ import java.util.Optional;
 
 public interface ClientService {
 
-    Client saveClient(Client client);
+    Client1 saveClient(Client1 client);
 
-    Page<Client> getClients(int page, int size);
+    Page<Client1> getClients(int page, int size);
 
     Page<ClientDetails> getClientsDetails(int page, int size);
 
-    Optional<Client> getClient(Long clientId);
+    Optional<Client1> getClient(Long clientId);
 
-    Client updateClient(ClientDto clientDto,Long clientId);
+    Client1 updateClient(ClientDto clientDto, Long clientId);
 
     ClientDetails updateClientDetails(ClientDetails clientDetails,Long clientId);
 

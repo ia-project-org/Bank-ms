@@ -3,7 +3,7 @@ package org.bankms.batch_processing.clientsconfig;
 
 import lombok.RequiredArgsConstructor;
 import org.bankms.clientsms.dto.ClientCsvRecord;
-import org.bankms.clientsms.model.Client;
+import org.bankms.clientsms.model.Client1;
 import org.bankms.clientsms.repository.ClientDetailsRepository;
 import org.bankms.clientsms.repository.ClientRepository;
 import org.springframework.batch.core.Job;
@@ -17,11 +17,9 @@ import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
@@ -67,7 +65,7 @@ public class ClientsImportBatchConfig {
     @Bean
     public Step ClientimportStep() {
         return new StepBuilder("importClientsStep", jobRepository)
-                .<ClientCsvRecord, Client>chunk(20, platformTransactionManager)
+                .<ClientCsvRecord, Client1>chunk(20, platformTransactionManager)
                 .reader(ClientItemReader())
                 .processor(Clientprocessor())
                 .writer(Clientwriter())

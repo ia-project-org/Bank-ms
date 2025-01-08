@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Client {
+public class Client1 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long clientId;
@@ -37,7 +37,7 @@ public class Client {
     @Column(updatable = false, nullable = false)
     private LocalDateTime createdAt;
 
-    public Client() {
+    public Client1() {
 
     }
 }

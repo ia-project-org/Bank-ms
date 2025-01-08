@@ -23,7 +23,7 @@ public class ClientDetails {
     @MapsId
     @JoinColumn(name = "client_id")
     @JsonBackReference
-    private Client client;
+    private Client1 client;
     private double score;
     private String name;
     private String email;

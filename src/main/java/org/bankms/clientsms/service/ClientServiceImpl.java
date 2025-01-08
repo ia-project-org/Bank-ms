@@ -2,7 +2,7 @@ package org.bankms.clientsms.service;
 
 import lombok.RequiredArgsConstructor;
 import org.bankms.clientsms.dto.ClientDto;
-import org.bankms.clientsms.model.Client;
+import org.bankms.clientsms.model.Client1;
 import org.bankms.clientsms.model.ClientDetails;
 import org.bankms.clientsms.repository.ClientDetailsRepository;
 import org.bankms.clientsms.repository.ClientRepository;
@@ -17,8 +17,6 @@ import java.util.Optional;
 import java.util.function.ToDoubleFunction;
 import java.util.stream.Collectors;
 
-import static java.text.Normalizer.normalize;
-
 @Service
 @RequiredArgsConstructor
 public class ClientServiceImpl implements ClientService{
@@ -28,12 +26,12 @@ public class ClientServiceImpl implements ClientService{
     private final ClientDetailsRepository clientDetailsRepository;
 
     @Override
-    public Client saveClient(Client client) {
+    public Client1 saveClient(Client1 client) {
         return clientRepository.save(client);
     }
 
     @Override
-    public Page<Client> getClients(int page, int size) {
+    public Page<Client1> getClients(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return clientRepository.findAll(pageable);
     }
@@ -45,13 +43,13 @@ public class ClientServiceImpl implements ClientService{
     }
 
     @Override
-    public Optional<Client> getClient(Long clientId) {
+    public Optional<Client1> getClient(Long clientId) {
         return clientRepository.findById(clientId);
     }
 
     @Override
-    public Client updateClient(ClientDto clientDto,Long clientId) {
-        Client client = clientRepository.findClientByClientId(clientId);
+    public Client1 updateClient(ClientDto clientDto, Long clientId) {
+        Client1 client = clientRepository.findClientByClientId(clientId);
         if (client != null)
             clientRepository.save(client);
         return client;

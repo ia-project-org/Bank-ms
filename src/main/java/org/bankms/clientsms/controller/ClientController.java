@@ -1,7 +1,7 @@
 package org.bankms.clientsms.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.bankms.clientsms.model.Client;
+import org.bankms.clientsms.model.Client1;
 import org.bankms.clientsms.service.ClientService;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
@@ -32,10 +32,10 @@ public class ClientController {
     private final ClientService clientService;
 
     @GetMapping
-    public ResponseEntity<Page<Client>> getPaginatedClients(
+    public ResponseEntity<Page<Client1>> getPaginatedClients(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size) {
-        Page<Client> clientPage = clientService.getClients(page, size);
+        Page<Client1> clientPage = clientService.getClients(page, size);
         return ResponseEntity.ok(clientPage);
     }
 
