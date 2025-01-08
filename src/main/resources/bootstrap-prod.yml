@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: Bank-ms
+  cloud:
+    config:
+      uri: https://configserver-1-7zer.onrender.com
+      fail-fast: true
