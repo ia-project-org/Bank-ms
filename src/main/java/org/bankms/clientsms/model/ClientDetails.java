@@ -89,7 +89,7 @@ public class ClientDetails {
 
     @JsonProperty("credit_mix")
     @Column(nullable = false)
-    private Long creditMix; // Updated to int64
+    private String creditMix; // Updated to int64
 
     @JsonProperty("outstanding_debt")
     @Column(nullable = false)
@@ -105,7 +105,7 @@ public class ClientDetails {
 
     @JsonProperty("payment_of_min_amount")
     @Column(nullable = false)
-    private Long paymentOfMinAmount; // Updated to int64
+    private String paymentOfMinAmount; // Updated to int64
 
     @JsonProperty("amount_invested_monthly")
     @Column(nullable = false)

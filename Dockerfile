@@ -13,11 +13,11 @@ WORKDIR /app
 # Expose the necessary port
 EXPOSE 9001
 
+# Create the folder /app/resources/static
+RUN mkdir -p /app/resources/static
+
 # Copy the built JAR file from the builder stage
 COPY --from=builder /app/target/*.jar app.jar
-
-# Copy the resources/static folder from the builder stage
-COPY --from=builder /app/target/classes/static/*.csv /app/resources/static/clientsDetails.csv
 
 # Run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]

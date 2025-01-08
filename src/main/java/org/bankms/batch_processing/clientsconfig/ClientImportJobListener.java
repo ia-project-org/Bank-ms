@@ -2,16 +2,14 @@ package org.bankms.batch_processing.clientsconfig;
 
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
 
+import static org.bankms.batch_processing.clientsconfig.ClientsImportBatchConfig.file_path;
+
 @Component
 public class ClientImportJobListener implements JobExecutionListener {
-
-    @Value("${app.file.input-path}")
-    public String file_path;
 
     @Override
     public void beforeJob(JobExecution jobExecution) {

@@ -34,6 +34,7 @@ public class ClientWriter implements ItemWriter<Client> {
                     && countSelectedOccupations(clientDetails)==1){
                 clientDetailsList.add(clientDetails);
                 cliensList.add(client);
+                System.out.println(clientDetails);
             }
         }
         // Save ClientDetails first
